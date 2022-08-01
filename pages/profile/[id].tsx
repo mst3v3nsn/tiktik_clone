@@ -12,13 +12,13 @@ interface IProps {
     data: {
         user: IUser,
         userVideos: Video[],
-        userLiked: Video[],
+        userLikedVideos: Video[],
     }
 }
 
 const Profile = ({ data }: IProps) => {
     const [showUserVideos, setShowUserVideos] = useState(true);
-    const { user, userVideos, userLiked } = data;
+    const { user, userVideos, userLikedVideos } = data;
     const [videosList, setVideosList] = useState<Video[]>([])
 
     const videos = showUserVideos ? 'border-b-2 border-black' : 'text-gray-400';
@@ -28,9 +28,9 @@ const Profile = ({ data }: IProps) => {
         if(showUserVideos) {
             setVideosList(userVideos);
         } else {
-            setVideosList(userLiked);
+            setVideosList(userLikedVideos);
         }
-    }, [showUserVideos, userLiked])
+    }, [showUserVideos, userLikedVideos])
 
     return (
         <div className="w-full">

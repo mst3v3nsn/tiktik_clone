@@ -27,6 +27,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             .unset([`likes[_ref=="${userId}"]`])
             .commit();
 
-        res.status(200).json('Updated Post');
+        res.status(200).json(data);
     } 
 }
