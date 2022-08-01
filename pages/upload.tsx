@@ -27,6 +27,9 @@ const Upload = () => {
         const fileTypes = ['video/mp4', 'video/webm', 'video/ogg']
 
         if (fileTypes.includes(selectedFile.type)) {
+            setWrongFileType(false);
+            setIsLoading(true)
+
             client.assets.upload('file', selectedFile, {
                 contentType: selectedFile.type, 
                 filename: selectedFile.name
@@ -70,6 +73,13 @@ const Upload = () => {
         }
     }
 
+    const handleDiscard = () => {
+        setSavingPost(false);
+        setVideoAsset(undefined);
+        setCaption('');
+        setCategory('');
+    }
+
     return (
         <div className="flex w-full h-full absolute left-0 top-[60px] lg:top-[70px] mb-10 pt-10 lg:pt-20 bg-[#F8F8F8] justify-center">
             <div className="bg-white rounded-lg xl:h-[80vh] flex gap-6 flex-wrap w-[60%] justify-between items-center p-14 pt-6">
@@ -80,7 +90,7 @@ const Upload = () => {
                     </div>
                     <div className="border-dashed rounded-xl border-4 border-gray-400 flex flex-col justify-center items-center outline-none mt-10 w-[260px] h-[460px] p-10 cursor-pointer hover:border-red-300 hover:bg-gray-100">
                         {isLoading ? (
-                            <p>Uploading...</p>
+                            <p className="text-center text-3xl text-red-400 font-semibold">Uploading...</p>
                         ) : (
                             <div>
                                 {videoAsset ? (
@@ -157,7 +167,7 @@ const Upload = () => {
                     </select>
                     <div className="flex gap-6 mt-10">
                         <button
-                            onClick={() => {}}
+                            onClick={handleDiscard}
                             type="button"
                             className="border-gray-300 border-2 text-md font-medium p-2 rounded w-28 lg:w-44 outline-none"
                         >
